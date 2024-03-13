@@ -16,7 +16,7 @@ new p5((p) => {
 
   p.draw = () => {
 
-  };
+  }; 
 
   p.keyPressed = (keyEvent) => {
 
