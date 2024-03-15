@@ -25,6 +25,7 @@ new p5((p) => {
     canvasEl.canvas.style = "";
 
     p.textFont(font);
+    p.noSmooth();
   };
 
   p.draw = () => {
