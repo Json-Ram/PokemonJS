@@ -44,7 +44,9 @@ new p5((p) => {
   }; 
 
   p.keyPressed = (keyEvent) => {
-
+    if (keyEvent.key === "Enter" && currentScene === "menu") {
+      setScene("world");
+    }
   };
 
   p.keyReleased = () => {
