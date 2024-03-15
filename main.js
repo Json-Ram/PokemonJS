@@ -1,9 +1,22 @@
+import { makeMenu } from "./scenes/menu.js";
+
 new p5((p) => {
   
   let font;
+
+  const scenes = ["menu", "world", "battle"];
+  const currentScene = "menu";
+
+  function setScene(name) {
+    if (!scenes.includes(name)) return;
+    currentScene = name;
+  }
+
+  const menu = makeMenu(p);
   
   p.preload = () => {
     font = p.loadFont("./assets/power-clear.ttf");
+    menu.load();
   };
 
   p.setup = () => {
@@ -15,7 +28,19 @@ new p5((p) => {
   };
 
   p.draw = () => {
-
+    switch (currentScene) {
+      case "menu":
+        menu.update();
+        menu.draw();
+        break;
+      case "world":
+        //to do
+        break;
+      case "battle":
+        //to do
+        break;
+      default:
+    }
   }; 
 
   p.keyPressed = (keyEvent) => {
