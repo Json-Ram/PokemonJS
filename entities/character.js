@@ -36,6 +36,21 @@ export function makeCharacter(p) {
       if (this.currentFrame === 0) {
         this.currentFrame = animData.from;
       }
+
+      if (this.currentFrame > animData.to && animData.loop) {
+        this.currentFrame = animData.from;
+      }
+
+      const currentFrame = this.frames[this.currentFrame];
+
+      const durationPerFrame = 1000 / animData.speed;
+
+      if (this.animationTimer >= durationPerFrame) {
+        this.currentFrame++;
+        this.animationTimer -= durationPerFrame;
+      }
+
+      return currentFrame;
     }
   };
 }
