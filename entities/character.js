@@ -11,6 +11,7 @@ export function makeCharacter(p) {
     tileHeight: 48,
     width: 32,
     height: 32,
+    direction: null,
 
     setAnim(name) {
       if (this.currentAnim !== name) {
