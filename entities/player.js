@@ -1,4 +1,5 @@
 import { makeCharacter } from "./character.js";
+import { getFramesPos } from "../utils.js";
 
 export function makePlayer(p, x, y) {
   return {
@@ -17,7 +18,7 @@ export function makePlayer(p, x, y) {
     },
 
     prepareAnims() {
-      
+      this.frames = getFramesPos(4, 4, this.tileWidth, this.tileHeight);
 
       this.anims = {
         "idle-down": 0,
