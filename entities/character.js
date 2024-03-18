@@ -12,6 +12,7 @@ export function makeCharacter(p) {
     width: 32,
     height: 32,
     direction: null,
+    frames: [],
 
     setAnim(name) {
       if (this.currentAnim !== name) {

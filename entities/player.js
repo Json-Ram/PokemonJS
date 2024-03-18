@@ -11,5 +11,13 @@ export function makePlayer(p, x, y) {
     spriteX: 0,
     spriteY: -15,
     freeze: false,
+    
+    load() {
+      this.spriteRef = p.loadImage("./assets/boy_run.png");
+    },
+
+    prepareAnims() {
+      
+    },
   }
 }
