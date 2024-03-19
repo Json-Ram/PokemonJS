@@ -62,5 +62,16 @@ export function makePlayer(p, x, y) {
       this.direction = "down";
       this.setAnim("idle-down");
     },
+
+    update() {
+      this.previousTime = this.animationTimer;
+      this.animationTimer += p.deltaTime;
+
+      const moveBy = (this.speed / 1000) * p.deltaTime;
+      this.movePlayer(moveBy);
+
+      const animData = this.anims[this.currentAnim];
+      this.currentFrameData = this.setAnimFrame(animData);
+    },
   };
 }
