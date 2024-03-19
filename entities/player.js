@@ -74,9 +74,9 @@ export function makePlayer(p, x, y) {
       this.currentFrameData = this.setAnimFrame(animData);
     },
 
-    draw() {
-      this.screenX = this.x;
-      this.screenY = this.y;
+    draw(camera) {
+      this.screenX = this.x + camera.x;
+      this.screenY = this.y + camera.y;
 
       p.push();
       if (this.direction === "right") {
