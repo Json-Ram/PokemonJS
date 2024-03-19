@@ -73,5 +73,17 @@ export function makePlayer(p, x, y) {
       const animData = this.anims[this.currentAnim];
       this.currentFrameData = this.setAnimFrame(animData);
     },
+
+    draw() {
+      this.screenX = this.x;
+      this.screenY = this.y;
+
+      p.push();
+      if (this.direction === "right") {
+        p.scale(-1, 1);
+        p.translate(-2 * this.screenX - this.tileWidth, 0);
+      }
+      p.pop();
+    }
   };
 }
