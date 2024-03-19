@@ -56,5 +56,11 @@ export function makePlayer(p, x, y) {
         this.y += moveBy;
       }
     },
+
+    setup() {
+      this.prepareAnims();
+      this.direction = "down";
+      this.setAnim("idle-down");
+    },
   };
 }
