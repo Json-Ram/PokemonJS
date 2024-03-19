@@ -16,3 +16,26 @@ export function getFramesPos(spriteCols, spriteRows, tileWidth, tileHeight) {
   return framesPos;
 
 }
+
+export function drawTile(
+  p,
+  src,
+  destinationX,
+  destinationY,
+  srcX,
+  srcY,
+  tileWidth,
+  tileHeight
+) {
+  p.image (
+    src,
+    destinationX,
+    destinationY,
+    tileWidth,
+    tileHeight,
+    srcX,
+    srcY,
+    tileWidth,
+    tileHeight
+  );
+}

@@ -1,5 +1,5 @@
 import { makeCharacter } from "./character.js";
-import { getFramesPos } from "../utils.js";
+import { getFramesPos, drawTile} from "../utils.js";
 
 export function makePlayer(p, x, y) {
   return {
@@ -83,6 +83,17 @@ export function makePlayer(p, x, y) {
         p.scale(-1, 1);
         p.translate(-2 * this.screenX - this.tileWidth, 0);
       }
+
+      drawTile(
+        p,
+        this.spriteRef,
+        this.screenX + this.screenX,
+        this.screenY + this.screenY,
+        this.currentFrameData.x,
+        this.currentFrameData.y,
+        this.tileWidth,
+        this.tileHeight
+      );
       p.pop();
     }
   };
