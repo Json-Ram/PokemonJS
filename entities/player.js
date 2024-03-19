@@ -29,5 +29,32 @@ export function makePlayer(p, x, y) {
         "run-up": { from: 12, to: 15, loop: true, speed: 8 },
       };
     },
-  }
+
+    movePlayer(moveBy) {
+
+      if (p.keyIsDown(p.RIGHT_ARROW)) {
+        this.setDirection("right");
+        this.setAnim("run-side");
+        this.x += moveBy;
+      }
+
+      if (p.keyIsDown(p.LEFT_ARROW)) {
+        this.setDirection("left");
+        this.setAnim("run-side");
+        this.x -= moveBy;
+      }
+
+      if (p.keyIsDown(p.UP_ARROW)) {
+        this.setDirection("up");
+        this.setAnim("run-up");
+        this.y -= moveBy;
+      }
+
+      if (p.keyIsDown(p.DOWN_ARROW)) {
+        this.setDirection("down");
+        this.setAnim("run-down");
+        this.y += moveBy;
+      }
+    },
+  };
 }
