@@ -1,5 +1,5 @@
 import { makeCharacter } from "./character.js";
-import { getFramesPos, drawTile} from "../utils.js";
+import { drawTile, getFramesPos } from "../utils.js";
 
 export function makePlayer(p, x, y) {
   return {
@@ -14,7 +14,7 @@ export function makePlayer(p, x, y) {
     freeze: false,
     
     load() {
-      this.spriteRef = p.loadImage("./assets/boy_run.png");
+      this.spriteRef = p.loadImage("assets/boy_run.png");
     },
 
     prepareAnims() {
@@ -64,7 +64,7 @@ export function makePlayer(p, x, y) {
     },
 
     update() {
-      this.previousTime = this.animationTimer;
+      //this.previousTime = this.animationTimer;
       this.animationTimer += p.deltaTime;
 
       const moveBy = (this.speed / 1000) * p.deltaTime;
@@ -87,8 +87,8 @@ export function makePlayer(p, x, y) {
       drawTile(
         p,
         this.spriteRef,
-        this.screenX + this.screenX,
-        this.screenY + this.screenY,
+        this.screenX + this.spriteX,
+        this.screenY + this.spriteY,
         this.currentFrameData.x,
         this.currentFrameData.y,
         this.tileWidth,

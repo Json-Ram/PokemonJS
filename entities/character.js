@@ -18,7 +18,7 @@ export function makeCharacter(p) {
       if (this.currentAnim !== name) {
         this.currentAnim = name;
         this.currentFrame = 0;
-        this.animationTrainer = 0;
+        this.animationTimer = 0;
         this.previousTime = 0;
       }
     },
