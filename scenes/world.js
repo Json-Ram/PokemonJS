@@ -21,7 +21,8 @@ export function makeWorld(p, setScene) {
     },
 
     draw() {
-      this.player.draw();
+      p.clear();
+      this.player.draw(this.camera);
     }
   };
 }

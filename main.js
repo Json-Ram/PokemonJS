@@ -1,11 +1,12 @@
 import { makeMenu } from "./scenes/menu.js";
+import { makeWorld } from "./scenes/world.js";
 
 new p5((p) => {
   
   let font;
 
   const scenes = ["menu", "world", "battle"];
-  const currentScene = "menu";
+  let currentScene = "menu";
 
   function setScene(name) {
     if (!scenes.includes(name)) return;
@@ -13,10 +14,12 @@ new p5((p) => {
   }
 
   const menu = makeMenu(p);
+  const world = makeWorld(p, setScene);
   
   p.preload = () => {
     font = p.loadFont("./assets/power-clear.ttf");
     menu.load();
+    world.load();
   };
 
   p.setup = () => {
@@ -26,6 +29,8 @@ new p5((p) => {
 
     p.textFont(font);
     p.noSmooth();
+
+    world.setup();
   };
 
   p.draw = () => {
@@ -35,7 +40,8 @@ new p5((p) => {
         menu.draw();
         break;
       case "world":
-        //to do
+        world.update();
+        world.draw();
         break;
       case "battle":
         //to do
