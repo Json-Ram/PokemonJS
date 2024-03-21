@@ -6,7 +6,7 @@ export function makeMenu(p) {
     alpha: 255,
     blinkBack: false,
     load() {
-      this.startScreenImgRef = p.loadImage("./assets/title.png");
+      this.startScreenImgRef = p.loadImage("./assets/GengarIvysaurTitle2.png");
       this.startTextImgRef = p.loadImage("./assets/start.png");
     },
     update() {
