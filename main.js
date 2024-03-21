@@ -57,6 +57,8 @@ new p5((p) => {
   };
 
   p.keyReleased = () => {
-
+    if (currentScene === "world") {
+      world.keyReleased();
+    }
   };
 });
