@@ -1,5 +1,5 @@
 import { makeCharacter } from "./character.js";
-import { drawTile, getFramesPos } from "../utils.js";
+import { drawTile, getFramesPos, isMaxOneKeyDown } from "../utils.js";
 
 export function makePlayer(p, x, y) {
   return {
@@ -31,6 +31,8 @@ export function makePlayer(p, x, y) {
     },
 
     movePlayer(moveBy) {
+
+      if (!isMaxOneKeyDown(p) || this.freeze) return;
 
       if (p.keyIsDown(p.RIGHT_ARROW)) {
         this.setDirection("right");
