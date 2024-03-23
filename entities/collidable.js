@@ -8,7 +8,22 @@ export function makeCollidable(p, x, y, width, height) {
     height,
 
     preventPassthroughFrom(entity) {
+      const collision = !(
+        this.x + this.width < entity.x ||
+        this.x > entity.x + entity.width ||
+        this.y + this.height < entity.y ||
+        this.y > entity.y + entity.height
+      );
 
+      if (collision) {
+        const overlapX = 
+          Math.min(this.x + this.width, entity.x + entity.width) -
+          Math.max(this.x, entity.x);
+        
+        const overlapY = 
+          Math.min(this.y + this.height, entity.y + entity.height) -
+          Math.max(this.y, entity.y);
+      }
     },
 
     update(camera) {
@@ -16,7 +31,7 @@ export function makeCollidable(p, x, y, width, height) {
     },
 
     draw() {
-      
+
     }
   }
 }
