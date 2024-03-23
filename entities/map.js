@@ -12,7 +12,7 @@ export function makeTiledMap(p, x, y) {
     },
 
     prepareTiles() {
-
+      this.tilePos = getFramesPos(8, 55, this.tileWidth, this.tileHeight);
     },
 
     getSpawnPoints() {
