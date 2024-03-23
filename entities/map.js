@@ -5,8 +5,10 @@ export function makeTiledMap(p, x, y) {
     x,
     y,
 
-    async load() {
-
+    async load(tilesetURL, tiledMapURL) {
+      this.mapImage = p.loadImage(tilesetURL);
+      const response = await fetch(tiledMapURL);
+      this.tileData = await response.json();
     },
 
     prepareTiles() {
