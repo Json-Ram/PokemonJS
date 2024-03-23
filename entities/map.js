@@ -1,3 +1,5 @@
+import { getFramesPos } from "../utils";
+
 export function makeTiledMap(p, x, y) {
   return {
     tileWidth: 32,
@@ -16,7 +18,11 @@ export function makeTiledMap(p, x, y) {
     },
 
     getSpawnPoints() {
-
+      for (const layer of this.tileData.layers) {
+        if (layer.name === "SpawnPoints") {
+          return layer.objects;
+        }
+      }
     },
 
     draw(camera, player) {
