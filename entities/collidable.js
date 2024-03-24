@@ -45,7 +45,8 @@ export function makeCollidable(p, x, y, width, height) {
     },
 
     update(camera) {
-
+      this.screenX = this.x + camera.x;
+      this.screenY = this.y + camera.y;
     },
 
     draw() {
