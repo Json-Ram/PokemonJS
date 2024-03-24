@@ -1,12 +1,16 @@
 import { makePlayer } from "../entities/player.js";
 import { makeCamera } from "../entities/camera.js";
+import { makeTiledMap } from "../entities/map.js";
 
 export function makeWorld(p, setScene) {
   return {
     camera: makeCamera(p, 100, 0),
     player: makePlayer(p, 0, 0),
+    npc: null,
+    map: makeTiledMap(p, 100, -150),
 
     load() {
+      this.map.load("./assets/Trainer Tower interior.png", "./maps/world.json");
       this.player.load();
     },
 
