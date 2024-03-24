@@ -1,4 +1,4 @@
-export function makeDebugMode() {
+function makeDebugMode() {
   return {
     enabled: false,
 
@@ -13,6 +13,14 @@ export function makeDebugMode() {
 
     toggle() {
       this.enabled = !this.enabled;
+    },
+
+    drawHitBox(p, hitbox) {
+      if (!this.enabled) return;
+      p.fill(255, 0, 0, 63);
+      p.rec(hitbox.screenX, hitbox.screenY, hitbox.width, hitbox.height);
     }
-  }
+  };
 }
+
+export const debugMode = makeDebugMode();
