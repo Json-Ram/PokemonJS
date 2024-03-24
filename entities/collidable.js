@@ -1,3 +1,5 @@
+import { debugMode } from "./debugMode.js";
+
 export function makeCollidable(p, x, y, width, height) {
   return {
     x,
@@ -50,7 +52,7 @@ export function makeCollidable(p, x, y, width, height) {
     },
 
     draw() {
-
+      debugMode.drawHitBox(p, this);
     }
   }
 }
