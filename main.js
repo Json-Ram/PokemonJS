@@ -1,3 +1,4 @@
+import { debugMode } from "./entities/debugMode.js";
 import { makeMenu } from "./scenes/menu.js";
 import { makeWorld } from "./scenes/world.js";
 
@@ -48,9 +49,16 @@ new p5((p) => {
         break;
       default:
     }
+
+    debugMode.drawFpsCounter(p);
   }; 
 
   p.keyPressed = (keyEvent) => {
+
+    if (keyEvent.key === "Shift") {
+      debugMode.toggle();
+    }
+
     if (keyEvent.key === "Enter" && currentScene === "menu") {
       setScene("world");
     }

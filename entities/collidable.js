@@ -36,6 +36,7 @@ export function makeCollidable(p, x, y, width, height) {
           entity.x = this.x - this.width;
           return;
         }
+        
         if (this.y < entity.y) {
           //bottom
           entity.y = this.y + this.height;

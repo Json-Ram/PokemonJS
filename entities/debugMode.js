@@ -18,7 +18,7 @@ function makeDebugMode() {
     drawHitBox(p, hitbox) {
       if (!this.enabled) return;
       p.fill(255, 0, 0, 63);
-      p.rec(hitbox.screenX, hitbox.screenY, hitbox.width, hitbox.height);
+      p.rect(hitbox.screenX, hitbox.screenY, hitbox.width, hitbox.height);
     }
   };
 }
