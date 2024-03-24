@@ -14,7 +14,7 @@ export function makePlayer(p, x, y) {
     freeze: false,
     
     load() {
-      this.spriteRef = p.loadImage("assets/boy_run.png");
+      this.spriteRef = p.loadImage("assets/char_m.png");
     },
 
     prepareAnims() {
