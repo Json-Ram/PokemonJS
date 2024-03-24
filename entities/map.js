@@ -1,4 +1,5 @@
-import { drawTile, getFramesPos } from "../utils";
+import { drawTile, getFramesPos } from "../utils.js";
+import { makeCollidable } from "./collidable.js";
 
 export function makeTiledMap(p, x, y) {
   return {
@@ -61,7 +62,17 @@ export function makeTiledMap(p, x, y) {
 
         if (layer.type === "objectgroup" && layer.name === "Boundaries") {
           for (const boundary of layer.objects) {
-            const collidable = 0; // placeholder
+            const collidable = makeCollidable(
+              p,
+              boundary.x,
+              this.y + boundary.y + 32,
+              boundary.width,
+              boundary.height
+            );
+
+            collidable.preventPassthroughFrom(player);
+            collidable.update(camera);
+            collidable.draw();
           }
         }
       }
