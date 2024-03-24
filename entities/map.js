@@ -11,15 +11,15 @@ export function makeTiledMap(p, x, y) {
     async load(tilesetURL, tiledMapURL) {
       this.mapImage = p.loadImage(tilesetURL);
       const response = await fetch(tiledMapURL);
-      this.tileData = await response.json();
+      this.tiledData = await response.json();
     },
 
     prepareTiles() {
-      this.tilePos = getFramesPos(8, 55, this.tileWidth, this.tileHeight);
+      this.tilesPos = getFramesPos(8, 55, this.tileWidth, this.tileHeight);
     },
 
     getSpawnPoints() {
-      for (const layer of this.tileData.layers) {
+      for (const layer of this.tiledData.layers) {
         if (layer.name === "SpawnPoints") {
           return layer.objects;
         }
@@ -27,18 +27,19 @@ export function makeTiledMap(p, x, y) {
     },
 
     draw(camera, player) {
-      for (const layer of this.tileData.layers) {
-        if (layer.type ===  "tilelayer") {
+      for (const layer of this.tiledData.layers) {
+        if (layer.type === "tilelayer") {
           const currentTilePos = {
             x: this.x,
             y: this.y
-          }
+          };
           
           let numberOfTilesDrawn = 0;
+
           for (const tileNumber of layer.data) {
             if (numberOfTilesDrawn % layer.width === 0) {
               currentTilePos.x = this.x;
-              currentTilePos.y = this.tileHeight;              
+              currentTilePos.y += this.tileHeight;              
             } else {
               currentTilePos.x += this.tileWidth;
             }
@@ -51,9 +52,9 @@ export function makeTiledMap(p, x, y) {
               p,
               this.mapImage,
               Math.round(currentTilePos.x + camera.x),
-              Math.round(currentTilePos.y),
-              this.tilePos[tileNumber - 1].x,
-              this.tilePos[tileNumber - 1].y,
+              Math.round(currentTilePos.y + camera.y),
+              this.tilesPos[tileNumber - 1].x,
+              this.tilesPos[tileNumber - 1].y,
               this.tileWidth,
               this.tileHeight
               );
@@ -64,7 +65,7 @@ export function makeTiledMap(p, x, y) {
           for (const boundary of layer.objects) {
             const collidable = makeCollidable(
               p,
-              boundary.x,
+              this.x + boundary.x,
               this.y + boundary.y + 32,
               boundary.width,
               boundary.height

@@ -20,8 +20,8 @@ export function makeWorld(p, setScene) {
 
       for (const spawnPoint of spawnPoints) {
         switch (spawnPoint.name) {
-          case "player":
-            this.player.x = spawnPoint.x;
+          case "Player":
+            this.player.x = this.map.x + spawnPoint.x;
             this.player.y = this.map.y + spawnPoint.y + 32
             break;
           case "npc":
@@ -44,7 +44,8 @@ export function makeWorld(p, setScene) {
     draw() {
       p.clear();
       p.background(0);
-      p.rect(100 + this.camera.x, 100 + this.camera.y, 50, 50);
+      this.map.draw(this.camera, this.player);
+      //p.rect(100 + this.camera.x, 100 + this.camera.y, 50, 50);
       this.player.draw(this.camera);
     },
 
