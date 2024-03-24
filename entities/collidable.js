@@ -23,6 +23,24 @@ export function makeCollidable(p, x, y, width, height) {
         const overlapY = 
           Math.min(this.y + this.height, entity.y + entity.height) -
           Math.max(this.y, entity.y);
+
+        if (overlapX < overlapY) {
+          if (this.x < entity.x) {
+            //right
+            entity.x = this.x + this.width;
+            return;
+          }
+          //left
+          entity.x = this.x - this.width;
+          return;
+        }
+        if (this.y < entity.y) {
+          //bottom
+          entity.y = this.y + this.height;
+          return;
+        }
+          //top
+          entity.y = this.y - entity.height;
       }
     },
 
