@@ -15,6 +15,23 @@ export function makeWorld(p, setScene) {
     },
 
     setup() {
+      this.map.prepareTiles();
+      const spawnPoints = this.map.getSpawnPoints();
+
+      for (const spawnPoint of spawnPoints) {
+        switch (spawnPoint.name) {
+          case "player":
+            this.player.x = spawnPoint.x;
+            this.player.y = this.map.y + spawnPoint.y + 32
+            break;
+          case "npc":
+            //this.npc.x = spawnPoint.x;
+            //this.player.y = this.map.y + spawnPoint.y + 32
+            break;
+          default:
+        }
+      }
+
       this.player.setup();
       this.camera.attachTo(this.player);
     },
