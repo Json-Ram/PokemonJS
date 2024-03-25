@@ -15,7 +15,7 @@ export function makeTiledMap(p, x, y) {
     },
 
     prepareTiles() {
-      this.tilesPos = getFramesPos(8, 55, this.tileWidth, this.tileHeight);
+      this.tilesPos = getFramesPos(8, 502, this.tileWidth, this.tileHeight); //update params with res of tileset / 32
     },
 
     getSpawnPoints() {

@@ -10,7 +10,7 @@ export function makeWorld(p, setScene) {
     map: makeTiledMap(p, 100, -150),
 
     load() {
-      this.map.load("./assets/Trainer Tower interior.png", "./maps/world.json");
+      this.map.load("./assets/Outside.png", "./maps/world.json");
       this.player.load();
     },
 
