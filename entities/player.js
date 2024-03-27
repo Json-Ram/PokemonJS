@@ -1,4 +1,5 @@
 import { makeCharacter } from "./character.js";
+import { debugMode } from "./debugMode.js";
 import { drawTile, getFramesPos, isMaxOneKeyDown } from "../utils.js";
 
 export function makePlayer(p, x, y) {
@@ -85,7 +86,7 @@ export function makePlayer(p, x, y) {
         p.scale(-1, 1);
         p.translate(-2 * this.screenX - this.tileWidth, 0);
       }
-
+      debugMode.drawHitBox(p, this);
       drawTile(
         p,
         this.spriteRef,

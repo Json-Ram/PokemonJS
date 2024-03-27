@@ -1,5 +1,6 @@
 import { getFramesPos } from "../utils.js";
 import { makeCharacter } from "./character.js";
+import { debugMode } from "./debugMode.js";
 
 export function makeNPC(p, x, y) {
   return {
@@ -32,6 +33,24 @@ export function makeNPC(p, x, y) {
       this.animationTimer += p.deltaTime;
       const animData = this.anims[this.currentAnim];
       this.currentFrameData = this.setAnimFrame(animData);
+    },
+
+    draw(camera) {
+      this.screenX = this.x + camera.x;
+      this.screenY = this.y + camera.y;
+
+      debugMode.drawHitBox(p, this);
+
+      drawTile(
+        p,
+        this.spriteRef,
+        this.screenX + this.spriteX,
+        this.screenY + this.spriteY,
+        this.currentFrameData.x,
+        this.currentFrameData.y,
+        this.tileWidth,
+        this.tileHeight
+      );
     }
   };
 }
