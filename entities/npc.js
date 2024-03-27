@@ -26,6 +26,12 @@ export function makeNPC(p, x, y) {
     setup() {
       this.prepareAnims();
       this.setAnim("idle-down");
+    },
+
+    update() {
+      this.animationTimer += p.deltaTime;
+      const animData = this.anims[this.currentAnim];
+      this.currentFrameData = this.setAnimFrame(animData);
     }
   };
 }
