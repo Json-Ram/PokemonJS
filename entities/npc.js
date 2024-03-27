@@ -21,6 +21,11 @@ export function makeNPC(p, x, y) {
       this.anims = {
         "idle-down": 0,
       };
+    },
+
+    setup() {
+      this.prepareAnims();
+      this.setAnim("idle-down");
     }
   };
 }
