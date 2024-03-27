@@ -6,7 +6,6 @@ export function makeCharacter(p) {
     currentFrame: 0,
     currentFrameData: null,
     animationTimer: 0,
-    previousTime: 0,
     tileWidth: 32,
     tileHeight: 48,
     width: 32,
@@ -19,7 +18,6 @@ export function makeCharacter(p) {
         this.currentAnim = name;
         this.currentFrame = 0;
         this.animationTimer = 0;
-        this.previousTime = 0;
       }
     },
 

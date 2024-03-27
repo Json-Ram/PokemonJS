@@ -51,6 +51,18 @@ export function makeNPC(p, x, y) {
         this.tileWidth,
         this.tileHeight
       );
+    },
+
+    handleCollisionsWith(entity, collisionEvent) {
+      if (entity.freeze) return;
+
+      const collision = checkCollision(this, entity);
+
+      if (collision) {
+        preventOverlap(this, entity);
+        entity.freeze = true;
+        collisionEvent();
+      }
     }
   };
 }
