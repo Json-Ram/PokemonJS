@@ -1,17 +1,19 @@
 import { makePlayer } from "../entities/player.js";
 import { makeCamera } from "../entities/camera.js";
 import { makeTiledMap } from "../entities/map.js";
+import { makeNPC } from "../entities/npc.js";
 
 export function makeWorld(p, setScene) {
   return {
     camera: makeCamera(p, 100, 0),
     player: makePlayer(p, 0, 0),
-    npc: null,
+    npc: makeNPC(p, 0, 0),
     map: makeTiledMap(p, 100, -150),
 
     load() {
       this.map.load("./assets/Outside.png", "./maps/world.json");
       this.player.load();
+      this.npc.load();
     },
 
     setup() {
@@ -22,11 +24,11 @@ export function makeWorld(p, setScene) {
         switch (spawnPoint.name) {
           case "Player":
             this.player.x = this.map.x + spawnPoint.x;
-            this.player.y = this.map.y + spawnPoint.y + 32
+            this.player.y = this.map.y + spawnPoint.y + this.map.tileHeight;
             break;
-          case "npc":
-            //this.npc.x = spawnPoint.x;
-            //this.player.y = this.map.y + spawnPoint.y + 32
+          case "Npc":
+            this.npc.x = this.map.x + spawnPoint.x;
+            this.npc.y = this.map.y + spawnPoint.y + this.map.tileHeight;
             break;
           default:
         }
@@ -34,19 +36,25 @@ export function makeWorld(p, setScene) {
 
       this.player.setup();
       this.camera.attachTo(this.player);
+
+      this.npc.setup();
     },
 
     update() {
       this.camera.update();
       this.player.update();
+      this.npc.update();
+      this.npc.handleCollisionsWith(this.player, () => {
+        console.log("collision");
+      });
     },
 
     draw() {
       p.clear();
       p.background(0);
       this.map.draw(this.camera, this.player);
-      //p.rect(100 + this.camera.x, 100 + this.camera.y, 50, 50);
       this.player.draw(this.camera);
+      this.npc.draw(this.camera);
     },
 
     keyReleased() {
