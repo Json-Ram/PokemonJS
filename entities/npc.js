@@ -1,4 +1,4 @@
-import { getFramesPos } from "../utils.js";
+import { getFramesPos, checkCollision, preventOverlap } from "../utils.js";
 import { makeCharacter } from "./character.js";
 import { debugMode } from "./debugMode.js";
 

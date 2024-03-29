@@ -15,7 +15,7 @@ export function makeCollidable(p, x, y, width, height) {
 
       if (collision) {
         preventOverlap(this, entity);
-      }
+      };
     },
 
     update(camera) {
