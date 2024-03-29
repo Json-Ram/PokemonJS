@@ -57,3 +57,15 @@ export function isMaxOneKeyDown(p) {
 
   return true;
 }
+
+export function checkCollision(objA, objB) {
+  return !(
+    objA.x + objA.width < objB.x ||
+
+    objA.x > objB.x + objB.width ||
+
+    objA.y + objA.height < objB.y ||
+    
+    objA.y > objB.y + objB.height
+  );
+}
