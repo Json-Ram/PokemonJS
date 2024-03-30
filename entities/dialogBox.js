@@ -17,6 +17,11 @@ export function makeDialogBox(p, x, y) {
 
     setVisibility(isVisible) {
       this.isVisible = isVisible;
+    },
+
+    displayTextImmediately(content) {
+      this.line = content;
+      this.isComplete = true;
     }
   };
 }
