@@ -34,6 +34,11 @@ export function makeDialogBox(p, x, y) {
       }
 
       this.onCompleteCallback = null;
+    },
+
+    clearText() {
+      this.line = "";
+      this.lineChars = [];
     }
   };
 }
