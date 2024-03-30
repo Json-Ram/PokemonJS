@@ -14,5 +14,9 @@ export function makeDialogBox(p, x, y) {
     load() {
       this.spriteRef = p.loadImage("assets/overlay_message.png");
     },
+
+    setVisibility(isVisible) {
+      this.isVisible = isVisible;
+    }
   };
 }
