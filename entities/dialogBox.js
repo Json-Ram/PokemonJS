@@ -22,6 +22,18 @@ export function makeDialogBox(p, x, y) {
     displayTextImmediately(content) {
       this.line = content;
       this.isComplete = true;
+    },
+
+    displayText(content, onComplete) {
+      this.lineChars = content.split("");
+      this.isComplete = false;
+      
+      if (onComplete) {
+        this.onCompleteCallback = onComplete;
+        return;
+      }
+
+      this.onCompleteCallback = null;
     }
   };
 }
