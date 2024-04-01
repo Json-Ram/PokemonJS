@@ -84,7 +84,11 @@ export function makeWorld(p, setScene) {
       this.player.draw(this.camera);
       this.npc.draw(this.camera);
       this.dialogBox.draw();
-      
+
+      if (this.makeScreenFlash) {
+        p.fill(0, 0, 0, this.alpha);
+        p.rect(0, 0, 512, 384);
+      }
     },
 
     keyReleased() {
