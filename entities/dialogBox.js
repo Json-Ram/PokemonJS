@@ -66,6 +66,15 @@ export function makeDialogBox(p, x, y) {
 
         this.line += nextChar;
       }
+    },
+
+    draw() {
+      if (!this.isVisible) return;
+
+      p.image(this.spriteRef, this.x, this.y);
+      p.fill("black");
+      p.textSize(24);
+      p.text(this.line, this.x + 30, this.y + 42);
     }
   };
 }
