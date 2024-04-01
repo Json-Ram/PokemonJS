@@ -58,6 +58,10 @@ export function makeWorld(p, setScene) {
           async () => {
             await sleep(1000);
             this.dialogBox.setVisibility(false);
+            this.makeScreenFlash = true;
+            await sleep(1000);
+            this.makeScreenFlash = false;
+            setScene("battle");
           }
         );
 
