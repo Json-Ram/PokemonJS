@@ -98,3 +98,7 @@ export function preventOverlap(objA, objB) {
     // top
     objB.y = objA.y - objB.height;
 }
+
+export async function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

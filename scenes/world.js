@@ -3,6 +3,7 @@ import { makeCamera } from "../entities/camera.js";
 import { makeTiledMap } from "../entities/map.js";
 import { makeNPC } from "../entities/npc.js";
 import { makeDialogBox } from "../entities/dialogBox.js";
+import { sleep } from "../utils.js";
 
 export function makeWorld(p, setScene) {
   return {
@@ -55,7 +56,7 @@ export function makeWorld(p, setScene) {
         this.dialogBox.displayText(
           "Let's battle!",
           async () => {
-            await new Promise((resolve) => setTimeout(resolve, 1000 ));
+            await sleep(1000);
             this.dialogBox.setVisibility(false);
           }
         );
