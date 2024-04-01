@@ -2,6 +2,7 @@ import { makePlayer } from "../entities/player.js";
 import { makeCamera } from "../entities/camera.js";
 import { makeTiledMap } from "../entities/map.js";
 import { makeNPC } from "../entities/npc.js";
+import { makeDialogBox } from "../entities/dialogBox.js";
 
 export function makeWorld(p, setScene) {
   return {
@@ -9,11 +10,13 @@ export function makeWorld(p, setScene) {
     player: makePlayer(p, 0, 0),
     npc: makeNPC(p, 0, 0),
     map: makeTiledMap(p, 100, -150),
+    dialogBox: makeDialogBox(p, 0, 285),
 
     load() {
       this.map.load("./assets/Outside.png", "./maps/world.json");
       this.player.load();
       this.npc.load();
+      this.dialogBox.load();
     },
 
     setup() {
@@ -45,8 +48,18 @@ export function makeWorld(p, setScene) {
       this.player.update();
       this.npc.update();
       this.npc.handleCollisionsWith(this.player, () => {
-        console.log("collision");
+        this.dialogBox.displayText(
+          "Let's battle!",
+          async () => {
+            await new Promise((resolve) => setTimeout(resolve, 1000 ));
+            this.dialogBox.setVisibility(false);
+          }
+        );
+
+        this.dialogBox.setVisibility(true);
       });
+
+      this.dialogBox.update();
     },
 
     draw() {
@@ -55,6 +68,7 @@ export function makeWorld(p, setScene) {
       this.map.draw(this.camera, this.player);
       this.player.draw(this.camera);
       this.npc.draw(this.camera);
+      this.dialogBox.draw();
     },
 
     keyReleased() {

@@ -5,7 +5,7 @@ import { drawTile, getFramesPos, isMaxOneKeyDown } from "../utils.js";
 export function makePlayer(p, x, y) {
   return {
     ...makeCharacter(p),
-    speed: 200,
+    speed: 400,
     x,
     y,
     screenX: x,
