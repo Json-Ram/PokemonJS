@@ -4,7 +4,6 @@ export function makeDialogBox(p, x, y) {
     y,
     spriteRef: null,
     currentTime: 0,
-    previousTime: 0,
     lineChars: null,
     line: "",
     isVisible: false,
@@ -39,6 +38,34 @@ export function makeDialogBox(p, x, y) {
     clearText() {
       this.line = "";
       this.lineChars = [];
+    },
+
+    update() {
+      if (!this.isVisible) return;
+
+      this.currentTime += p.deltaTime;
+
+      const durationPerFrame = 1000 / 60;
+
+      if (this.currentTime >= durationPerFrame) {
+        this.currentTime -= durationPerFrame;
+
+        const nextChar = this.lineChars.shift();
+
+        if (this.isComplete) return;
+
+        if (!nextChar && !this.isComplete) {
+          this.isComplete = true;
+
+          if(this.onCompleteCallback) {
+            this.onCompleteCallback();
+          }
+
+          return;
+        }
+
+        this.line += nextChar;
+      }
     }
   };
 }
