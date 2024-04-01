@@ -11,6 +11,10 @@ export function makeWorld(p, setScene) {
     npc: makeNPC(p, 0, 0),
     map: makeTiledMap(p, 100, -150),
     dialogBox: makeDialogBox(p, 0, 285),
+    makeScreenFlash: false,
+    alpha: 0,
+    blinkBack: false,
+    easing: 3,
 
     load() {
       this.map.load("./assets/Outside.png", "./maps/world.json");
@@ -60,6 +64,17 @@ export function makeWorld(p, setScene) {
       });
 
       this.dialogBox.update();
+
+      // To do - Make Reusable func in utils 
+
+      if (this.alpha <= 0) this.blinkBack = true;
+      if (this.alpha >= 255) this.blinkBack = false;
+
+      if (this.blinkBack) {
+        this.alpha += 0.7 * this.easing * p.deltaTime;
+      } else {
+        this.alpha -= 0.7 * this.easing * p.deltaTime;
+      }
     },
 
     draw() {
@@ -69,6 +84,7 @@ export function makeWorld(p, setScene) {
       this.player.draw(this.camera);
       this.npc.draw(this.camera);
       this.dialogBox.draw();
+      
     },
 
     keyReleased() {
