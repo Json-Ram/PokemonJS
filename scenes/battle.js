@@ -1,3 +1,5 @@
+import { makeDialogBox } from "../entities/dialogBox.js"
+
 const states = {
   default: "default",
   npcIntro: "npc-intro",
@@ -8,4 +10,14 @@ const states = {
   npcTurn: "npc-turn",
   battleEnd: "battle-end",
   winnerDeclared: "winner-declared"
+}
+
+export function makeBattle(p) {
+  return {
+    dialogBox: makeDialogBox(p, 0, 288),
+    currentState: states.default,
+    npc: {},
+    ncpPokemon: {},
+    playerPokemon: {}
+  };
 }
