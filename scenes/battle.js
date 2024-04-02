@@ -36,6 +36,31 @@ function makePokemon(
   };
 }
 
+function makeDataBox(
+  x,
+  y,
+  nameX,
+  nameY,
+  healthBarX,
+  healthBarY
+) {
+  return {
+    x,
+    y,
+    nameOffset: {
+      x: nameX,
+      y: nameY
+    },
+    healthBarOffset: {
+      x: healthBarX,
+      y: healthBarY
+    },
+    spriteRef: null,
+    maxHealthBarLength: 96, // Shows total health
+    healthBarLength: 96 // Shows current health
+  };
+}
+
 export function makeBattle(p) {
   return {
     dialogBox: makeDialogBox(p, 0, 288),
