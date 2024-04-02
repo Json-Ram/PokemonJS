@@ -18,6 +18,34 @@ export function makeBattle(p) {
     currentState: states.default,
     npc: {},
     ncpPokemon: {},
-    playerPokemon: {}
+    playerPokemon: {},
+
+    drawDataBox() {
+
+    },
+
+    async dealDamage(targetPokemon, attackingPokemon) {
+
+    },
+
+    load() {
+
+    },
+
+    setup() {
+
+    },
+
+    update() {
+
+    },
+
+    draw() {
+
+    },
+
+    onKeyPressed(keyEvent) {
+
+    }
   };
 }
