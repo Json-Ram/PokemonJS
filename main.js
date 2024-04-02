@@ -1,4 +1,5 @@
 import { debugMode } from "./entities/debugMode.js";
+import { makeBattle } from "./scenes/battle.js";
 import { makeMenu } from "./scenes/menu.js";
 import { makeWorld } from "./scenes/world.js";
 
@@ -16,11 +17,13 @@ new p5((p) => {
 
   const menu = makeMenu(p);
   const world = makeWorld(p, setScene);
+  const battle = makeBattle(p);
   
   p.preload = () => {
     font = p.loadFont("./assets/power-clear.ttf");
     menu.load();
     world.load();
+    battle.load();
   };
 
   p.setup = () => {
@@ -32,6 +35,7 @@ new p5((p) => {
     p.noSmooth();
 
     world.setup();
+    battle.setup();
   };
 
   p.draw = () => {
@@ -45,7 +49,8 @@ new p5((p) => {
         world.draw();
         break;
       case "battle":
-        //to do
+        battle.update();
+        battle.draw();
         break;
       default:
     }
@@ -62,6 +67,8 @@ new p5((p) => {
     if (keyEvent.key === "Enter" && currentScene === "menu") {
       setScene("world");
     }
+
+    if (currentScene === "battle") battle.onKeyPressed(keyEvent);
   };
 
   p.keyReleased = () => {
