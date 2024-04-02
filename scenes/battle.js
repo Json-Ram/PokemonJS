@@ -10,6 +10,30 @@ const states = {
   npcTurn: "npc-turn",
   battleEnd: "battle-end",
   winnerDeclared: "winner-declared"
+};
+
+function makePokemon(
+  name,
+  x,
+  finalX,
+  y,
+  maxHp,
+  attacks,
+  dataBox
+) {
+  return {
+    name,
+    x,
+    finalX,
+    y,
+    spriteRef: null,
+    maxHp,
+    hp: maxHp,
+    attacks,
+    selectedAttack: null,
+    isFainted: false,
+    dataBox
+  };
 }
 
 export function makeBattle(p) {
