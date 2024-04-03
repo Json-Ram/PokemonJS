@@ -70,8 +70,34 @@ export function makeBattle(p) {
       y: 20,
       spriteRef: null
     },
-    ncpPokemon: {},
-    playerPokemon: {},
+    ncpPokemon: makePokemon(
+      "EEVEE",
+      600,
+      310,
+      20,
+      200,
+      [
+        {name: "BODY SLAM", power: 60 },
+        {name: "SWIFT", power: 40 },
+        {name: "CRUNCH", power: 80 },
+        {name: "HYPER VOICE", power: 100 },
+      ],
+      makeDataBox(-300, 40, 15, 30, 118, 40)
+    ),
+    playerPokemon: makePokemon(
+      "GENGAR",
+      -170,
+      20,
+      128,
+      200,
+      [
+        {name: "SHADOW BALL", power: 90 },
+        {name: "SUCKER PUNCH", power: 20 },
+        {name: "HYPER BEAM", power: 120 },
+        {name: "THUNDERBOLT", power: 70 },
+      ],
+      makeDataBox(510, 220, 38, 30, 136, 40)
+    ),
 
     drawDataBox() {
 
