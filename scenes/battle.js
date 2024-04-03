@@ -70,12 +70,12 @@ export function makeBattle(p) {
       y: 20,
       spriteRef: null
     },
-    ncpPokemon: makePokemon(
+    npcPokemon: makePokemon(
       "EEVEE",
       600,
       310,
       20,
-      200,
+      200, //health
       [
         {name: "BODY SLAM", power: 60 },
         {name: "SWIFT", power: 40 },
@@ -89,7 +89,7 @@ export function makeBattle(p) {
       -170,
       20,
       128,
-      200,
+      200, //health
       [
         {name: "SHADOW BALL", power: 90 },
         {name: "SUCKER PUNCH", power: 20 },
@@ -99,8 +99,16 @@ export function makeBattle(p) {
       makeDataBox(510, 220, 38, 30, 136, 40)
     ),
 
-    drawDataBox() {
+    drawDataBox(pokemon) {
+      //Draws pokemon name within dataBox image
+      p.image(pokemon.dataBox.spriteRef, pokemon.dataBox.x, pokemon.dataBox.y);
+      p.text(
+        pokemon.name,
+        pokemon.dataBox.x + pokemon.dataBox.nameOffset.x,
+        pokemon.dataBox.y + pokemon.dataBox.nameOffset.y
+      );
 
+      //Draws pokemon health bar
     },
 
     async dealDamage(targetPokemon, attackingPokemon) {
