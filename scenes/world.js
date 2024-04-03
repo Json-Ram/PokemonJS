@@ -71,7 +71,7 @@ export function makeWorld(p, setScene) {
       this.dialogBox.update();
 
       // To do - Make Reusable func in utils 
-
+      // Blinks screen before battle scene
       if (this.alpha <= 0) this.blinkBack = true;
       if (this.alpha >= 255) this.blinkBack = false;
 

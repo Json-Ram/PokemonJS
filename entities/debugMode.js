@@ -7,7 +7,7 @@ function makeDebugMode() {
       p.push();
       p.fill("yellow");
       p.textSize(24);
-      p.text(Math.trunc(p.frameRate()), 10, 20);
+      p.text(Math.trunc(p.frameRate()), 10, 30);
       p.pop();
     },
 
