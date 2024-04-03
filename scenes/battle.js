@@ -109,6 +109,28 @@ export function makeBattle(p) {
       );
 
       //Draws pokemon health bar
+      p.push();
+      p.angleMode(p.DEGREES);
+      p.rotate(360);
+      p.noStroke();
+
+      if (pokemon.dataBox.healthBarLength > 50) {
+        p.fill(0, 200, 0);
+      }
+      if (pokemon.dataBox.healthBarLength < 50) {
+        p.fill(255, 165, 0);
+      }
+      if (pokemon.dataBox.healthBarLength > 20) {
+        p.fill(200, 0, 0);
+      }
+
+      p.rect(
+        pokemon.dataBox.x + pokemon.dataBox.healthBarOffset.x,
+        pokemon.dataBox.y + pokemon.dataBox.healthBarOffset.y,
+        pokemon.dataBox.healthBarLength,
+        6
+      );
+      p.pop();
     },
 
     async dealDamage(targetPokemon, attackingPokemon) {
