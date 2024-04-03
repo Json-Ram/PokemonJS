@@ -65,7 +65,11 @@ export function makeBattle(p) {
   return {
     dialogBox: makeDialogBox(p, 0, 288),
     currentState: states.default,
-    npc: {},
+    npc: {
+      x: 350,
+      y: 20,
+      spriteRef: null
+    },
     ncpPokemon: {},
     playerPokemon: {},
 
