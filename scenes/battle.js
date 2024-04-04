@@ -1,4 +1,5 @@
 import { makeDialogBox } from "../entities/dialogBox.js"
+import { sleep } from "../utils.js";
 
 const states = {
   default: "default",
@@ -134,7 +135,17 @@ export function makeBattle(p) {
     },
 
     async dealDamage(targetPokemon, attackingPokemon) {
-
+      targetPokemon.hp -= attackingPokemon.selectedAttack.power;
+      if (targetPokemon.hp > 0) {
+        targetPokemon.dataBox.healthBarLength = 
+          (targetPokemon.hp * targetPokemon.dataBox.maxHealthBarLength) /
+          targetPokemon.maxHp;
+          return;
+      }
+      targetPokemon.dataBox.healthBarLength = 0;
+      targetPokemon.isFainted = true;
+      await sleep(1000);
+      this.currentState = states.battleEnd;
     },
 
     load() {
@@ -145,7 +156,7 @@ export function makeBattle(p) {
 
     },
 
-    update() {
+    update() { 
 
     },
 
