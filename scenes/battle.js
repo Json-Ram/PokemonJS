@@ -174,7 +174,7 @@ export function makeBattle(p) {
               this.dialogBox.displayText(
                 `Go get em' ${this.playerPokemon.name}!`,
                 async () => {
-                  this.currentState = states.introPlayerPokemon;
+                  this.currentState = states.playerPokemonIntro;
                   await sleep(2000);
                   this.dialogBox.clearText();
                   this.dialogBox.displayText(
@@ -193,8 +193,43 @@ export function makeBattle(p) {
       this.dialogBox.setVisibility(true);
     },
 
-    update() { 
+    update() {
 
+      //Slide npc sprite into scene
+      if (this.currentState === states.introNpc) {
+        this.npc.x += 0.5 * p.deltaTime;
+      }
+
+      //Slide npc pokem0n onto scene
+      if (
+        this.currentState === states.npcPokemonIntro &&
+        this.npcPokemon.x >= this.npcPokemon.finalX
+      ) {
+        this.npcPokemon.x -= 0.5 * p.deltaTime;
+        if (this.npcPokemon.dataBox.x <= 0) {
+          this.npcPokemon.dataBox.x += 0.5 * p.deltaTime;
+        }
+      }
+
+      //Slide player pokemon into scene
+      if (
+        this.currentState === states.playerPokemonIntro &&
+        this.playerPokemon.x <= this.playerPokemon.finalX
+      ) {
+        this.playerPokemon.x += 0.5 * p.deltaTime;
+        this.playerPokemon.dataBox.x -= 0.65 * p.deltaTime;
+      }
+
+      //Slide Fainted pokemon out of scene
+      if (this.playerPokemon.isFainted) {
+        this.playerPokemon.y += 0.8 * p.deltaTime;
+      }
+
+      if (this.npcPokemon.isFainted) {
+        this.npcPokemon.y += 0.8 * p.deltaTime;
+      }
+
+      this.dialogBox.update();
     },
 
     draw() {
