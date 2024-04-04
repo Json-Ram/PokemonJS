@@ -149,7 +149,13 @@ export function makeBattle(p) {
     },
 
     load() {
+      this.battleBackgroundImage = p.loadImage("assets/battle-background.png");
+      this.npc.spriteRef = p.loadImage("assets/POKEMONRANGER_F.png");
+      this.npcPokemon.spriteRef = p.loadImage("assets/EEVEE.png");
+      this.playerPokemon.dataBox.spriteRef = p.loadImage("assets/databox_thin.png");
+      this.npcPokemon.dataBox.spriteRef = p.loadImage("assets/databox_thin_foe.png");
 
+      this.dialogBox.load();
     },
 
     setup() {
