@@ -159,7 +159,38 @@ export function makeBattle(p) {
     },
 
     setup() {
-
+      this.dialogBox.displayText(
+        "Champion May wants to battle!",
+        async () => {
+          await sleep(2000);
+          this.currentState = states.npcIntro;
+          this.dialogBox.clearText();
+          this.dialogBox.displayText(
+            `She sends out ${this.npcPokemon.name} EX!`,
+            async () => {
+              this.currentState = states.npcPokemonIntro;
+              await sleep(2000);
+              this.dialogBox.clearText();
+              this.dialogBox.displayText(
+                `Go get em' ${this.playerPokemon.name}!`,
+                async () => {
+                  this.currentState = states.introPlayerPokemon;
+                  await sleep(2000);
+                  this.dialogBox.clearText();
+                  this.dialogBox.displayText(
+                    `What will ${this.playerPokemon.name} do?`,
+                    async () => {
+                      await sleep(2000);
+                      this.currentState = states.playerTurn;
+                    }
+                  );
+                }
+              );
+            }
+          );
+        }
+      );
+      this.dialogBox.setVisibility(true);
     },
 
     update() { 
