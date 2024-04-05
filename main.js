@@ -16,10 +16,10 @@ new p5((p) => {
     currentScene = name;
   }
 
-  const menuTheme = new Audio("assets/menuTheme.mp3");
-  const worldTheme = new Audio("assets/citySong.mp3");
-  const battleTheme = new Audio("assets/battleSong.mp3");
-  const endTheme = new Audio("assets/endSong.mp3");
+  const menuTheme = new Audio("assets/menuThemeMin.mp3");
+  const worldTheme = new Audio("assets/citySongMin.mp3");
+  const battleTheme = new Audio("assets/battleSongMin.mp3");
+  const endTheme = new Audio("assets/endSongMin.mp3");
 
   const menu = makeMenu(p, menuTheme);
   const world = makeWorld(p, setScene, menuTheme, worldTheme, battleTheme);
