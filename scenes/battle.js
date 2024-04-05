@@ -233,7 +233,108 @@ export function makeBattle(p) {
     },
 
     draw() {
+      p.clear();
+      p.background(0);
+      p.image(this.battleBackgroundImage, 0, 0);
 
+      p.image(this.npcPokemon.spriteRef, this.npcPokemon.x, this.npcPokemon.y);
+
+      this.drawDataBox(this.pokemon);
+
+      p.image(
+        this.playerPokemon.spriteRef,
+        this.playerPokemon.x,
+        this.playerPokemon.y
+      );
+
+      this.drawDataBox(this.playerPokemon);
+
+      if (
+        this.currentState === states.default ||
+        this.currentState === states.introNpc
+      ) {
+        p.image(this.npc.spriteRef, this.npc.x, this.npc.y);
+      }
+      
+      if (
+        this.currentState === states.playerTurn &&
+        !this.playerPokemon.selectedAttack
+      ) {
+        this.dialogBox.displayTextImmediately(
+          `#1 ${this.playerPokemon.attacks[0].name}    #3 ${this.playerPokemon.attacks[2].name}\n#2 ${this.playerPokemon.attacks[1].name}    #4 ${this.playerPokemon.attacks[3].name}`
+        );
+      }
+
+      if (
+        this.currentState === states.playerTurn &&
+        this.playerPokemon.selectedAttack &&
+        !this.playerPokemon.isAttacking &&
+        !this.playerPokemon.isFainted
+      ) {
+        this.dialogBox.clearText();
+        this.dialogBox.displayText(
+          `${this.playerPokemon.name} used ${this.playerPokemon.selectedAttack.name} !`,
+          async () => {
+            await this.dealDamage(this.npcPokemon, this.playerPokemon);
+            if (this.currentState !== states.battleEnd) {
+              await sleep(2000);
+              this.dialogBox.clearText();
+              this.currentState = states.npcTurn;
+            }
+          }
+        );
+        this.playerPokemon.isAttacking = true;
+      }
+
+      if (this.currentState === states.npcTurn && !this.npcPokemon.isFainted) {
+        this.npcPokemon.selectedAttack =
+          this.npcPokemon.attacks[
+            Math.floor(Math.random() * this.npcPokemon.attacks.length)
+          ];
+        this.dialogBox.clearText();
+        this.dialogBox.displayText(
+          `The foe's ${this.npcPokemon.name} used ${this.npcPokemon.selectedAttack.name}`,
+          async () => {
+            await this.dealDamage(this.playerPokemon, this.npcPokemon);
+            if (this.currentState !== states.battleEnd) {
+              await sleep(2000);
+              this.playerPokemon.selectedAttack = null;
+              this.playerPokemon.isAttacking = false;
+            }
+          }
+        )
+        this.currentState = states.playerTurn;
+      }
+
+      if (this.currentState === states.battleEnd) {
+        if (this.npcPokemon.isFainted) {
+          this.dialogBox.clearText();
+          this.dialogBox.displayText(
+            `${this.npcPokemon.name} fainted.`
+          );
+          this.dialogBox.clearText();
+          this.dialogBox.displayText(
+            `You won!`
+          );
+          this.currentState = states.winnerDeclared;
+          return;
+        }
+
+        if (this.playerPokemon.isFainted) {
+          this.dialogBox.clearText();
+          this.dialogBox.displayText(
+            `${this.playerPokemon.name} fainted.`
+          );
+          this.dialogBox.clearText();
+          this.dialogBox.displayText(
+            `You lost...`
+          );
+          this.currentState = states.winnerDeclared;
+        }
+      }
+
+      p.rect(0, 288, 512, 200);
+      this.dialogBox.draw();
     },
 
     onKeyPressed(keyEvent) {
