@@ -333,12 +333,28 @@ export function makeBattle(p) {
         }
       }
 
-      p.rect(0, 288, 512, 200);
+      p.rect(0, 288, 512, 200); //draws black rectangle for pokemon to slide into scene from
       this.dialogBox.draw();
     },
 
     onKeyPressed(keyEvent) {
-
+      if (this.currentState === states.playerTurn) {
+        switch (keyEvent.key) {
+          case "1":
+            this.playerPokemon.selectedAttack = this.playerPokemon.attacks[0]
+            break;
+          case "2":
+            this.playerPokemon.selectedAttack = this.playerPokemon.attacks[1]
+            break;
+          case "3":
+            this.playerPokemon.selectedAttack = this.playerPokemon.attacks[2]
+            break;
+          case "4":
+            this.playerPokemon.selectedAttack = this.playerPokemon.attacks[3]
+            break;
+          default:
+        }
+      }
     }
   };
 }
