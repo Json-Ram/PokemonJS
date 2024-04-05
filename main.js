@@ -1,13 +1,14 @@
 import { debugMode } from "./entities/debugMode.js";
-import { makeBattle } from "./scenes/battle.js";
 import { makeMenu } from "./scenes/menu.js";
 import { makeWorld } from "./scenes/world.js";
+import { makeBattle } from "./scenes/battle.js";
+import { makeEnding } from "./scenes/ending.js";
 
 new p5((p) => {
   
   let font;
 
-  const scenes = ["menu", "world", "battle"];
+  const scenes = ["menu", "world", "battle", "ending"];
   let currentScene = "menu";
 
   function setScene(name) {
@@ -15,15 +16,26 @@ new p5((p) => {
     currentScene = name;
   }
 
-  const menu = makeMenu(p);
-  const world = makeWorld(p, setScene);
-  const battle = makeBattle(p, setScene);
+  const menuTheme = new Audio("assets/menuTheme.mp3");
+  const worldTheme = new Audio("assets/citySong.mp3");
+  const battleTheme = new Audio("assets/battleSong.mp3");
+  const endTheme = new Audio("assets/endSong.mp3");
+
+  const menu = makeMenu(p, menuTheme);
+  const world = makeWorld(p, setScene, menuTheme, worldTheme, battleTheme);
+  const battle = makeBattle(p, setScene, battleTheme);
+  const ending = makeEnding(p, battleTheme, endTheme);
   
   p.preload = () => {
     font = p.loadFont("./assets/power-clear.ttf");
+    menuTheme.load();
+    worldTheme.load();
+    battleTheme.load();
+    endTheme.load();
     menu.load();
     world.load();
     battle.load();
+    ending.load();
   };
 
   p.setup = () => {
@@ -52,6 +64,9 @@ new p5((p) => {
         battle.update();
         battle.draw();
         break;
+      case "ending":
+        ending.update();
+        ending.draw();
       default:
     }
 

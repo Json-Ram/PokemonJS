@@ -5,7 +5,7 @@ import { makeNPC } from "../entities/npc.js";
 import { makeDialogBox } from "../entities/dialogBox.js";
 import { sleep } from "../utils.js";
 
-export function makeWorld(p, setScene) {
+export function makeWorld(p, setScene, menuTheme, worldTheme, battleTheme) {
   return {
     camera: makeCamera(p, 100, 0),
     player: makePlayer(p, 0, 0),
@@ -83,6 +83,8 @@ export function makeWorld(p, setScene) {
     },
 
     draw() {
+      menuTheme.pause();
+      worldTheme.play();
       p.clear();
       p.background(0);
       this.map.draw(this.camera, this.player);
@@ -91,6 +93,8 @@ export function makeWorld(p, setScene) {
       this.dialogBox.draw();
 
       if (this.makeScreenFlash) {
+        worldTheme.pause();
+        battleTheme.play();
         p.fill(0, 0, 0, this.alpha);
         p.rect(0, 0, 512, 384);
       }

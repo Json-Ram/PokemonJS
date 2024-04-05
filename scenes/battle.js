@@ -1,5 +1,4 @@
 import { makeDialogBox } from "../entities/dialogBox.js"
-import { makePlayer } from "../entities/player.js";
 import { sleep } from "../utils.js";
 
 const states = {
@@ -77,7 +76,7 @@ export function makeBattle(p, setScene) {
       600,
       310,
       20,
-      200, //health
+      300, //health
       [
         {name: "BODY SLAM", power: 40 },
         {name: "SWIFT", power: 30 },
@@ -162,7 +161,7 @@ export function makeBattle(p, setScene) {
 
     setup() {
       this.dialogBox.displayText(
-        "Champion May wants to battle!",
+        "You've challenged Champion May!",
         async () => {
           await sleep(2000);
           this.currentState = states.npcIntro;
@@ -197,12 +196,12 @@ export function makeBattle(p, setScene) {
 
     update() {
 
-      //Slide npc sprite into scene
+      //Slide npc sprite out of scene
       if (this.currentState === states.npcIntro) {
         this.npc.x += 0.5 * p.deltaTime;
       }
 
-      //Slide npc pokem0n onto scene
+      //Slide npc pokemon onto scene
       if (
         this.currentState === states.npcPokemonIntro &&
         this.npcPokemon.x >= this.npcPokemon.finalX
@@ -263,7 +262,7 @@ export function makeBattle(p, setScene) {
         !this.playerPokemon.selectedAttack
       ) {
         this.dialogBox.displayTextImmediately(
-          `1 - ${this.playerPokemon.attacks[0].name}        2 - ${this.playerPokemon.attacks[2].name}\n3 - ${this.playerPokemon.attacks[1].name}      4 - ${this.playerPokemon.attacks[3].name}`
+          `1 - ${this.playerPokemon.attacks[0].name}      2 - ${this.playerPokemon.attacks[1].name}\n3 - ${this.playerPokemon.attacks[2].name}      4 - ${this.playerPokemon.attacks[3].name}`
         );
       }
 
@@ -275,7 +274,7 @@ export function makeBattle(p, setScene) {
       ) {
         this.dialogBox.clearText();
         this.dialogBox.displayText(
-          `${this.playerPokemon.name} used ${this.playerPokemon.selectedAttack.name} !`,
+          `${this.playerPokemon.name} used ${this.playerPokemon.selectedAttack.name}.`,
           async () => {
             await this.dealDamage(this.npcPokemon, this.playerPokemon);
             if (this.currentState !== states.battleEnd) {
@@ -295,7 +294,7 @@ export function makeBattle(p, setScene) {
           ];
         this.dialogBox.clearText();
         this.dialogBox.displayText(
-          `The foe's ${this.npcPokemon.name} used ${this.npcPokemon.selectedAttack.name}`,
+          `The foe's ${this.npcPokemon.name} used ${this.npcPokemon.selectedAttack.name}.`,
           async () => {
             await this.dealDamage(this.playerPokemon, this.npcPokemon);
             if (this.currentState !== states.battleEnd) {
@@ -318,7 +317,7 @@ export function makeBattle(p, setScene) {
               this.currentState = states.npcIntro;
               this.dialogBox.clearText();
               this.dialogBox.displayText(
-                `You've defeated Champion May.`,
+                `You've defeated Champion May!`,
                 async () => {
                   await sleep(2000);
                   this.currentState = states.npcIntro;
@@ -326,8 +325,8 @@ export function makeBattle(p, setScene) {
                   this.dialogBox.displayText(
                     `You're the new Champion!`
                     )
-                  await sleep(2000);
-                  setScene("credits");   
+                  await sleep(3000);
+                  setScene("ending");   
                   }
                 )
               }
@@ -338,7 +337,7 @@ export function makeBattle(p, setScene) {
         if (this.playerPokemon.isFainted) {
           this.dialogBox.clearText();
           this.dialogBox.displayText(
-            `Your ${this.playerPokemon.name} fainted.`,
+            `${this.playerPokemon.name} fainted.`,
             async () => {
               await sleep(2000);
               this.currentState = states.npcIntro;
@@ -346,8 +345,8 @@ export function makeBattle(p, setScene) {
               this.dialogBox.displayText(
                 `You blacked out.`
                 )
-              await sleep(2000);
-              setScene("credits");
+              await sleep(3000);
+              setScene("ending");
               }
           );
           this.currentState = states.winnerDeclared;

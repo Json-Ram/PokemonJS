@@ -1,4 +1,4 @@
-export function makeMenu(p) {
+export function makeMenu(p, menuTheme) {
   return {
     startScreenImgRef: null,
     startTextImgRef: null,
@@ -21,6 +21,7 @@ export function makeMenu(p) {
       this.alpha -= 0.7 * this.easing * p.deltaTime;
     },
     draw() {
+      menuTheme.play();
       p.clear();
       p.image(this.startScreenImgRef, 0, 0);
       p.tint(255, this.alpha);
