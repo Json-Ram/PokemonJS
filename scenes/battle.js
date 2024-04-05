@@ -75,7 +75,7 @@ export function makeBattle(p, setScene) {
       "EEVEE",
       600,
       310,
-      20,
+      40,
       300, //health
       [
         {name: "BODY SLAM", power: 40 },
@@ -87,9 +87,9 @@ export function makeBattle(p, setScene) {
     ),
     playerPokemon: makePokemon(
       "GENGAR",
-      -170,
-      20,
-      128,
+      -310,
+      -30,
+      105,
       200, //health
       [
         {name: "SHADOW BALL", power: 90 },
@@ -97,7 +97,7 @@ export function makeBattle(p, setScene) {
         {name: "DREAM EATER", power: 60 },
         {name: "PHANTOM FORCE", power: 50 },
       ],
-      makeDataBox(510, 220, 38, 30, 136, 40)
+      makeDataBox(630, 220, 38, 30, 136, 40)
     ),
 
     drawDataBox(pokemon) {
@@ -150,9 +150,9 @@ export function makeBattle(p, setScene) {
 
     load() {
       this.battleBackgroundImage = p.loadImage("assets/battle-background.png");
-      this.npc.spriteRef = p.loadImage("assets/POKEMONRANGER_F.png");
-      this.npcPokemon.spriteRef = p.loadImage("assets/EEVEE.png");
-      this.playerPokemon.spriteRef = p.loadImage("assets/GENGAR.png");
+      this.npc.spriteRef = p.loadImage("assets/May.gif");
+      this.npcPokemon.spriteRef = p.loadImage("assets/EEVEE.gif");
+      this.playerPokemon.spriteRef = p.loadImage("assets/GENGAR.gif");
       this.playerPokemon.dataBox.spriteRef = p.loadImage("assets/databox_thin.png");
       this.npcPokemon.dataBox.spriteRef = p.loadImage("assets/databox_thin_foe.png");
 
@@ -254,7 +254,7 @@ export function makeBattle(p, setScene) {
         this.currentState === states.default ||
         this.currentState === states.npcIntro
       ) {
-        p.image(this.npc.spriteRef, this.npc.x, this.npc.y);
+        p.image(this.npc.spriteRef, this.npc.x - 20, this.npc.y + 10);
       }
       
       if (
