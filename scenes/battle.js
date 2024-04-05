@@ -1,4 +1,5 @@
 import { makeDialogBox } from "../entities/dialogBox.js"
+import { makePlayer } from "../entities/player.js";
 import { sleep } from "../utils.js";
 
 const states = {
@@ -62,7 +63,7 @@ function makeDataBox(
   };
 }
 
-export function makeBattle(p) {
+export function makeBattle(p, setScene) {
   return {
     dialogBox: makeDialogBox(p, 0, 288),
     currentState: states.default,
@@ -78,10 +79,10 @@ export function makeBattle(p) {
       20,
       200, //health
       [
-        {name: "BODY SLAM", power: 60 },
-        {name: "SWIFT", power: 40 },
-        {name: "CRUNCH", power: 80 },
-        {name: "HYPER VOICE", power: 100 },
+        {name: "BODY SLAM", power: 40 },
+        {name: "SWIFT", power: 30 },
+        {name: "CRUNCH", power: 60 },
+        {name: "HYPER VOICE", power: 50 },
       ],
       makeDataBox(-300, 40, 15, 30, 118, 40)
     ),
@@ -94,8 +95,8 @@ export function makeBattle(p) {
       [
         {name: "SHADOW BALL", power: 90 },
         {name: "SUCKER PUNCH", power: 20 },
-        {name: "HYPER BEAM", power: 120 },
-        {name: "THUNDERBOLT", power: 70 },
+        {name: "DREAM EATER", power: 60 },
+        {name: "PHANTOM FORCE", power: 50 },
       ],
       makeDataBox(510, 220, 38, 30, 136, 40)
     ),
@@ -163,25 +164,25 @@ export function makeBattle(p) {
       this.dialogBox.displayText(
         "Champion May wants to battle!",
         async () => {
-          await sleep(3000);
+          await sleep(2000);
           this.currentState = states.npcIntro;
           this.dialogBox.clearText();
           this.dialogBox.displayText(
-            `She sends out ${this.npcPokemon.name}.`,
+            `Champion May sends out ${this.npcPokemon.name}.`,
             async () => {
               this.currentState = states.npcPokemonIntro;
-              await sleep(3000);
+              await sleep(2000);
               this.dialogBox.clearText();
               this.dialogBox.displayText(
                 `Go get em' ${this.playerPokemon.name}!`,
                 async () => {
                   this.currentState = states.playerPokemonIntro;
-                  await sleep(3000);
+                  await sleep(2000);
                   this.dialogBox.clearText();
                   this.dialogBox.displayText(
                     `What will ${this.playerPokemon.name} do?`,
                     async () => {
-                      await sleep(3000);
+                      await sleep(2000);
                       this.currentState = states.playerTurn;
                     }
                   );
@@ -262,7 +263,7 @@ export function makeBattle(p) {
         !this.playerPokemon.selectedAttack
       ) {
         this.dialogBox.displayTextImmediately(
-          `#1 ${this.playerPokemon.attacks[0].name}    #3 ${this.playerPokemon.attacks[2].name}\n#2 ${this.playerPokemon.attacks[1].name}    #4 ${this.playerPokemon.attacks[3].name}`
+          `1 - ${this.playerPokemon.attacks[0].name}        2 - ${this.playerPokemon.attacks[2].name}\n3 - ${this.playerPokemon.attacks[1].name}      4 - ${this.playerPokemon.attacks[3].name}`
         );
       }
 
@@ -278,7 +279,7 @@ export function makeBattle(p) {
           async () => {
             await this.dealDamage(this.npcPokemon, this.playerPokemon);
             if (this.currentState !== states.battleEnd) {
-              await sleep(3000);
+              await sleep(2000);
               this.dialogBox.clearText();
               this.currentState = states.npcTurn;
             }
@@ -298,7 +299,7 @@ export function makeBattle(p) {
           async () => {
             await this.dealDamage(this.playerPokemon, this.npcPokemon);
             if (this.currentState !== states.battleEnd) {
-              await sleep(3000);
+              await sleep(2000);
               this.playerPokemon.selectedAttack = null;
               this.playerPokemon.isAttacking = false;
             }
@@ -313,24 +314,25 @@ export function makeBattle(p) {
           this.dialogBox.displayText(
             `${this.npcPokemon.name} fainted.`,
             async () => {
-              await sleep(3000);
+              await sleep(2000);
               this.currentState = states.npcIntro;
               this.dialogBox.clearText();
               this.dialogBox.displayText(
                 `You've defeated Champion May.`,
                 async () => {
-                  await sleep(3000);
+                  await sleep(2000);
                   this.currentState = states.npcIntro;
                   this.dialogBox.clearText();
                   this.dialogBox.displayText(
                     `You're the new Champion!`
-                    )   
+                    )
+                  await sleep(2000);
+                  setScene("credits");   
                   }
                 )
               }
             )
           this.currentState = states.winnerDeclared;
-          return;
         }
 
         if (this.playerPokemon.isFainted) {
@@ -338,12 +340,14 @@ export function makeBattle(p) {
           this.dialogBox.displayText(
             `Your ${this.playerPokemon.name} fainted.`,
             async () => {
-              await sleep(3000);
+              await sleep(2000);
               this.currentState = states.npcIntro;
               this.dialogBox.clearText();
               this.dialogBox.displayText(
                 `You blacked out.`
-                )   
+                )
+              await sleep(2000);
+              setScene("credits");
               }
           );
           this.currentState = states.winnerDeclared;

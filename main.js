@@ -17,7 +17,7 @@ new p5((p) => {
 
   const menu = makeMenu(p);
   const world = makeWorld(p, setScene);
-  const battle = makeBattle(p);
+  const battle = makeBattle(p, setScene);
   
   p.preload = () => {
     font = p.loadFont("./assets/power-clear.ttf");

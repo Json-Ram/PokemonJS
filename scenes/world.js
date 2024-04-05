@@ -56,10 +56,10 @@ export function makeWorld(p, setScene) {
         this.dialogBox.displayText(
           "Let's battle!",
           async () => {
-            await sleep(1000);
+            await sleep(2000);
             this.dialogBox.setVisibility(false);
             this.makeScreenFlash = true;
-            await sleep(1000);
+            await sleep(2000);
             this.makeScreenFlash = false;
             setScene("battle");
           }
@@ -76,9 +76,9 @@ export function makeWorld(p, setScene) {
       if (this.alpha >= 255) this.blinkBack = false;
 
       if (this.blinkBack) {
-        this.alpha += 0.7 * this.easing * p.deltaTime;
+        this.alpha += 0.6 * this.easing * p.deltaTime;
       } else {
-        this.alpha -= 0.7 * this.easing * p.deltaTime;
+        this.alpha -= 0.6 * this.easing * p.deltaTime;
       }
     },
 
